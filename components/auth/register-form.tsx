@@ -2,9 +2,9 @@
 
 import * as z from 'zod'
 
-import { register } from '@/actions/register'
 import { useForm } from 'react-hook-form'
 import { RegisterSchema } from '@/schemas'
+import { register } from '@/actions/register'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { startTransition, useState, useTransition } from 'react';
 
