@@ -16,12 +16,18 @@ import {
 } from '@/components/ui/form'
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-import { FormError } from '../form-error';
 import { login } from '@/actions/login';
+import { FormError } from '../form-error';
+import { useSearchParams } from 'next/navigation';
 import { CardWrapper } from "@/components/auth/card-wrapper"
 import { startTransition, useState, useTransition } from 'react';
 
 export const LoginForm = () => {
+    const searchParams = useSearchParams()
+    const urlError = searchParams.get('error') === 'OAuthAccountNotLinked'
+        ? 'Email already is use with different provider!'
+        : ''
+
     const [error, setError] = useState<string | undefined>('')
     const [isPending, setTransition] = useTransition()
 
@@ -96,7 +102,7 @@ export const LoginForm = () => {
                             )}
                         />
                     </div>
-                    <FormError message={error} />
+                    <FormError message={error || urlError} />
                     <Button
                         type='submit'
                         className='w-full'
