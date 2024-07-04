@@ -29,8 +29,8 @@ export const LoginForm = () => {
         ? 'Email already is use with different provider!'
         : ''
 
-    const [error, setError] = useState<string | undefined>('')
-    const [success, setSuccess] = useState<string | undefined>('')
+    const [error, setError] = useState<string | undefined>()
+    const [success, setSuccess] = useState<string | undefined>()
     const [isPending, setTransition] = useTransition()
 
     const form = useForm<z.infer<typeof LoginSchema>>({
