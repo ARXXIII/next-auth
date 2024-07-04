@@ -18,6 +18,7 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { login } from '@/actions/login';
 import { FormError } from '../form-error';
+import { FormSuccess } from '../form-success';
 import { useSearchParams } from 'next/navigation';
 import { CardWrapper } from "@/components/auth/card-wrapper"
 import { startTransition, useState, useTransition } from 'react';
@@ -29,6 +30,7 @@ export const LoginForm = () => {
         : ''
 
     const [error, setError] = useState<string | undefined>('')
+    const [success, setSuccess] = useState<string | undefined>('')
     const [isPending, setTransition] = useTransition()
 
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -47,6 +49,7 @@ export const LoginForm = () => {
                 .then((data) => {
                     if (data) {
                         setError(data.error)
+                        setSuccess(data.success)
                     }
                 })
         })
@@ -103,6 +106,7 @@ export const LoginForm = () => {
                         />
                     </div>
                     <FormError message={error || urlError} />
+                    <FormSuccess message={success} />
                     <Button
                         type='submit'
                         className='w-full'
