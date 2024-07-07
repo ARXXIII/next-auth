@@ -5,8 +5,8 @@ import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { RegisterSchema } from '@/schemas'
 import { register } from '@/actions/register'
+import { useState, useTransition } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod'
-import { startTransition, useState, useTransition } from 'react';
 
 import {
     Form,
@@ -25,7 +25,8 @@ import { CardWrapper } from "@/components/auth/card-wrapper"
 export const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>('')
     const [success, setSuccess] = useState<string | undefined>('')
-    const [isPending, setTransition] = useTransition()
+
+    const [isPending, startTransition] = useTransition()
 
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
