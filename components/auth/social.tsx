@@ -2,15 +2,19 @@
 
 import { Button } from "../ui/button"
 import { signIn } from "next-auth/react"
+import { useSearchParams } from "next/navigation"
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes"
 
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
 
 export const Social = () => {
+    const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get('callbackUrl')
+
     const onClick = (provider: 'github' | 'google') => {
         signIn(provider, {
-            callbackUrl: DEFAULT_LOGIN_REDIRECT
+            callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT
         })
     }
 
