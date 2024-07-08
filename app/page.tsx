@@ -9,10 +9,10 @@ export default function Home() {
                     Auth
                 </h1>
                 <p className="text-lg text-white">
-                    A simple auth service
+                    A simple authentication service
                 </p>
                 <div>
-                    <LoginButton>
+                    <LoginButton mode="modal" asChild>
                         <Button variant='secondary' size='lg'>
                             Sign in
                         </Button>
